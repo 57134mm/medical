@@ -109,6 +109,29 @@ exports.getUser = async (req, res) => {
     }
 };
 
+exports.updateUser = async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const updateData = req.body; 
+  
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      await user.update(updateData);
+  
+      const updatedUser = await User.findByPk(userId, {
+        attributes: { exclude: ['password', 'confirm_password'] }
+      });
+  
+      res.status(200).json({ user: updatedUser || { message: 'User updated successfully' } });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
+
 exports.changePassword = async (req, res) => {
     try {
         const { oldPassword, newPassword, confirmPassword } = req.body;
