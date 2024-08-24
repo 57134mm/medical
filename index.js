@@ -1,14 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = require('../medical/src/routes/auth');
+const routerAuth = require('../medical/src/routes/auth');
+const routerPatient = require('../medical/src/routes/patient');
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', router);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
+app.use('/', routerAuth);
+app.use('/patient', routerPatient);
+
 const db = require('../medical/src/config/db');
-const User = require('../medical/src/models/User');
 
 db.sync()
     .then(() => {

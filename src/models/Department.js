@@ -1,17 +1,20 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/db');
 
-const Role = sequelize.define('role', {
+const Department = sequelize.define('department', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  name: {
+  department_name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
+    allowNull: false
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
 
-module.exports = Role;
+module.exports = Department;
