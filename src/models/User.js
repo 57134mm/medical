@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
-const db = require('../config/db');
+const sequelize = require('../config/db');
 const Role = require('../models/Role');
 
-const User = db.define('user', {
+const User = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

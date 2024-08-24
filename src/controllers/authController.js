@@ -2,7 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Role = require('../models/Role');
-const { SECRET_KEY } = require('../config/config');
+const { SECRET_KEY } = require('../config/key');
 
 exports.register = async (req, res) => {
     try {
@@ -43,7 +43,7 @@ exports.register = async (req, res) => {
             role_id: role.id
         });
 
-        res.status(201).json({ message: 'User created successfully', user });
+        res.status(200).json({ success: 'true', message: 'User created successfully', data: user });
     } catch (error) {
         if (error.code === '23505') {
             return res.status(400).json({ message: 'Email already in use' });
