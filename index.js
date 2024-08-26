@@ -4,6 +4,7 @@ const routerAuth = require('../medical/src/routes/auth');
 const routerPatient = require('../medical/src/routes/patient');
 const routerDepartment = require('../medical/src/routes/department');
 const routerReceptionist = require('../medical/src/routes/receptionist');
+const routerDoctor = require('../medical/src/routes/doctor');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger-output.json')
 
@@ -17,6 +18,7 @@ app.use('/', routerAuth);
 app.use('/patient', routerPatient);
 app.use('/department', routerDepartment);
 app.use('/receptionist', routerReceptionist);
+app.use('/doctor', routerDoctor);
 
 const db = require('../medical/src/config/db');
 
